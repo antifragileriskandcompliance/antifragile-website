@@ -287,7 +287,7 @@ footer a{color:var(--blue);text-decoration:none}
     <p class="section-subtitle">Tell us about your bank and we'll be in touch within one business day to set up your account.</p>
     <div class="signup-section">
       <div id="form-container">
-        <form id="signup-form" onsubmit="handleSubmit(event)">
+        <form id="signup-form" action="https://formspree.io/f/xgoqeeyw" method="POST">
           <div class="form-grid">
             <div class="form-group full"><label>Organization Name</label><input type="text" name="org_name" placeholder="First Bank of Kansas" required></div>
             <div class="form-group full"><label>Organization Address</label><input type="text" name="address" placeholder="123 Main Street, Topeka, KS 66601" required></div>
@@ -329,6 +329,7 @@ footer a{color:var(--blue);text-decoration:none}
             </div>
           </div>
           <div class="form-submit">
+            <input type="hidden" name="_next" value="https://antifragilegrc.com?submitted=true">
             <button type="submit" class="btn btn-primary btn-lg">Request Access →</button>
             <p class="form-note">We'll respond within one business day. Your information is used only to set up your account.</p>
           </div>
@@ -356,26 +357,13 @@ footer a{color:var(--blue);text-decoration:none}
 </footer>
 
 <script>
-async function handleSubmit(e) {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(e.target).entries());
-  const FORMSPREE_ID = 'xgoqeeyw';
-  try {
-    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json','Accept':'application/json'},
-      body: JSON.stringify(data),
-    });
-    if (res.ok) {
-      document.getElementById('form-container').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-    } else { fallbackMailto(data); }
-  } catch { fallbackMailto(data); }
-}
-function fallbackMailto(d) {
-  const s = encodeURIComponent(`Access Request — ${d.org_name}`);
-  const b = encodeURIComponent(`Organization: ${d.org_name}\nAddress: ${d.address}\nRegulator: ${d.regulator}\nAssets: ${d.assets}\nContact: ${d.contact_name}\nEmail: ${d.contact_email}\nPhone: ${d.contact_phone}\nAdditional Users: ${d.additional_users||'None'}\nReferral: ${d.referral||'Not specified'}`);
-  window.location.href = `mailto:support@antifragilegrc.com?subject=${s}&body=${b}`;
+if (window.location.search.includes('submitted=true')) {
+  document.addEventListener('DOMContentLoaded', function() {
+    const fc = document.getElementById('form-container');
+    const fs = document.getElementById('form-success');
+    if (fc) fc.style.display = 'none';
+    if (fs) fs.style.display = 'block';
+  });
 }
 </script>
 </body>
