@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antifragile GRC — Compliance Intelligence for Community Banks</title>
+<meta name="description" content="Purpose-built compliance management for community banks under $1B in assets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a0f1e;--navy-mid:#0d1528;--navy-light:#1a2540;--navy-border:#1e2d4a;--blue:#4a9eff;--green:#00c853;--text:#e2e8f0;--dim:#94a3b8;--muted:#64748b;--white:#ffffff}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(10,15,30,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--navy-border)}
+.nav-brand{font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--white);text-decoration:none}
+.nav-brand span{color:var(--blue)}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{color:var(--dim);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.25rem;border-radius:6px;font-size:.9rem;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer;border:none;font-family:'DM Sans',sans-serif}
+.btn-primary{background:var(--blue);color:var(--navy)}
+.btn-primary:hover{background:#6ab0ff;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--blue);border:1px solid var(--blue)}
+.btn-outline:hover{background:rgba(74,158,255,.1)}
+.btn-lg{padding:.875rem 2rem;font-size:1rem;border-radius:8px}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(74,158,255,.08) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .875rem;background:rgba(74,158,255,.1);border:1px solid rgba(74,158,255,.3);border-radius:100px;font-size:.78rem;font-family:'DM Mono',monospace;color:var(--blue);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2rem}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;color:var(--white);max-width:800px;margin-bottom:1.5rem;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--blue)}
+.hero p{font-size:1.2rem;color:var(--dim);max-width:580px;margin-bottom:2.5rem;line-height:1.7}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.hero-stats{display:flex;gap:3rem;margin-top:5rem;padding-top:3rem;border-top:1px solid var(--navy-border);flex-wrap:wrap;justify-content:center}
+.stat{text-align:center}
+.stat-number{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--white);display:block}
+.stat-label{font-size:.82rem;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em}
+section{padding:5rem 2rem;max-width:1100px;margin:0 auto}
+.section-label{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--blue);text-transform:uppercase;letter-spacing:.12em;margin-bottom:1rem;display:block}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--white);line-height:1.15;letter-spacing:-.02em;margin-bottom:1rem}
+.section-subtitle{font-size:1.1rem;color:var(--dim);max-width:600px;margin-bottom:3rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:3rem}
+.card{background:var(--navy-mid);border:1px solid var(--navy-border);border-radius:12px;padding:2rem;transition:border-color .2s,transform .2s}
+.card:hover{border-color:rgba(74,158,255,.4);transform:translateY(-2px)}
+.card-tag{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem;display:block}
+.card h3{font-size:1.05rem;font-weight:600;color:var(--white);margin-bottom:.5rem}
+.card p{font-size:.88rem;color:var(--dim);line-height:1.6}
+.full-width{max-width:100%;background:var(--navy-mid);border-top:1px solid var(--navy-border);border-bottom:1px solid var(--navy-border);padding:5rem 2rem}
+.full-width-inner{max-width:1100px;margin:0 auto}
+.step{position:relative;padding-left:1rem;border-left:2px solid var(--navy-border)}
+.step-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;display:block}
+.step h3{font-size:1rem;font-weight:600;color:var(--white);margin-bottom:.4rem}
+.step p{font-size:.88rem;color:var(--dim);line-height:1.6}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+.pricing-card{background:var(--navy-mid);border:1px solid var(--navy-border);border-radius:12px;padding:2rem;position:relative}
+.pricing-card.featured{border-color:var(--blue);background:linear-gradient(135deg,var(--navy-mid),rgba(74,158,255,.05))}
+.pricing-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--blue);color:var(--navy);font-size:.72rem;font-weight:700;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;padding:.2rem .75rem;border-radius:100px;white-space:nowrap}
+.pricing-tier{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;display:block}
+.pricing-card h3{font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:.25rem}
+.pricing-assets{font-size:.82rem;color:var(--muted);margin-bottom:1.5rem;font-family:'DM Mono',monospace}
+.pricing-price{font-family:'DM Serif Display',serif;font-size:2.2rem;color:var(--white);margin-bottom:.25rem}
+.pricing-period{font-size:.82rem;color:var(--muted);margin-bottom:1.5rem;display:block}
+.pricing-features{list-style:none;margin-bottom:2rem}
+.pricing-features li{font-size:.88rem;color:var(--dim);padding:.4rem 0;border-bottom:1px solid var(--navy-border);display:flex;align-items:center;gap:.5rem}
+.pricing-features li:last-child{border-bottom:none}
+.check{color:var(--green);font-size:.8rem}
+.philosophy-block{background:var(--navy-mid);border:1px solid var(--navy-border);border-radius:12px;padding:2.5rem;position:relative;overflow:hidden}
+.philosophy-block::before{content:'"';position:absolute;top:-.5rem;left:1.5rem;font-family:'DM Serif Display',serif;font-size:8rem;color:rgba(74,158,255,.08);line-height:1;pointer-events:none}
+.philosophy-block p{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--text);line-height:1.6;font-style:italic;position:relative;z-index:1}
+.philosophy-block cite{display:block;margin-top:1rem;font-size:.82rem;color:var(--muted);font-style:normal;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em}
+.signup-section{background:var(--navy-mid);border:1px solid var(--navy-border);border-radius:16px;padding:3rem;max-width:700px;margin:0 auto}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:.82rem;font-weight:500;color:var(--dim);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em}
+.form-group label .optional{color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-family:'DM Sans',sans-serif;font-size:.78rem;margin-left:.25rem}
+.form-group input,.form-group select,.form-group textarea{background:var(--navy);border:1px solid var(--navy-border);border-radius:8px;padding:.7rem .875rem;color:var(--text);font-size:.9rem;font-family:'DM Sans',sans-serif;transition:border-color .2s;width:100%}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--blue)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--muted)}
+.form-group select option{background:var(--navy-mid)}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-submit{margin-top:2rem;text-align:center}
+.form-note{font-size:.8rem;color:var(--muted);margin-top:1rem;text-align:center}
+.form-success{display:none;text-align:center;padding:2rem}
+.form-success h3{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--white);margin-bottom:.5rem}
+.form-success p{color:var(--dim);font-size:.95rem}
+.cta-banner{text-align:center;padding:5rem 2rem;max-width:700px;margin:0 auto}
+.cta-banner p{color:var(--dim);margin-bottom:2rem;font-size:1.05rem}
+footer{border-top:1px solid var(--navy-border);padding:2rem;text-align:center}
+footer p{font-size:.82rem;color:var(--muted)}
+footer a{color:var(--blue);text-decoration:none}
+@media(max-width:640px){nav{padding:1rem}.nav-links{display:none}.form-grid{grid-template-columns:1fr}.hero-stats{gap:1.5rem}.signup-section{padding:2rem 1.25rem}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero>*{animation:fadeUp .6s ease both}
+.hero>*:nth-child(1){animation-delay:.1s}
+.hero>*:nth-child(2){animation-delay:.2s}
+.hero>*:nth-child(3){animation-delay:.3s}
+.hero>*:nth-child(4){animation-delay:.4s}
+.hero>*:nth-child(5){animation-delay:.5s}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">Antifragile<span>GRC</span></a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#get-started">Get Started</a></li>
+    <li><a href="https://app.antifragilegrc.com" class="btn btn-primary">Log In</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Built by a compliance officer, for compliance officers</div>
+  <h1>Compliance management <em>built for community banks</em></h1>
+  <p>Not adapted from a system designed for JPMorgan. Purpose-built for banks under $1B in assets — your regulatory framework loads automatically, examination findings track to closure, and your board report takes one click.</p>
+  <div class="hero-actions">
+    <a href="#get-started" class="btn btn-primary btn-lg">Request Access</a>
+    <a href="https://app.antifragilegrc.com" class="btn btn-outline btn-lg">View Demo</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-number">8</span><span class="stat-label">States covered</span></div>
+    <div class="stat"><span class="stat-number">1 day</span><span class="stat-label">Setup time</span></div>
+    <div class="stat"><span class="stat-number">1 click</span><span class="stat-label">Board reports</span></div>
+    <div class="stat"><span class="stat-number">$0</span><span class="stat-label">Implementation fee</span></div>
+  </div>
+</div>
+
+<section id="problem">
+  <span class="section-label">The problem</span>
+  <h2>Enterprise GRC tools were not built for you</h2>
+  <p class="section-subtitle">Community banks carry disproportionate compliance burden. The tools on the market were designed for institutions ten times your size — and priced accordingly.</p>
+  <div class="grid-3">
+    <div class="card">
+      <span class="card-tag">💸 Cost</span>
+      <h3>Enterprise pricing, community bank budget</h3>
+      <p>Leading GRC platforms start at $100,000+ per year. That's a compliance officer's salary for software that doesn't understand your regulatory environment.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">📋 Time</span>
+      <h3>Six months to go live</h3>
+      <p>Implementation projects measured in quarters. Consultants charging by the hour to load content your examiners already know by heart.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">📊 Reporting</span>
+      <h3>Board reports from scratch every quarter</h3>
+      <p>Sunday afternoon in Excel, manually pulling data from four systems to produce a report that looks the same every time.</p>
+    </div>
+    <div class="card">
+      <span class="card-tag">🔍 Findings</span>
+      <h3>MRAs that don't close cleanly</h3>
+      <p>Examination findings tracked in spreadsheets, remediation owners who've moved on, and examiners who come back to find the same issues.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-width" id="features">
+  <div class="full-width-inner">
+    <span class="section-label">The platform</span>
+    <h2>Everything your compliance programme needs</h2>
+    <p class="section-subtitle">One platform. Obligations, controls, testing, findings, policies, and board reporting — connected.</p>
+    <div class="grid-3" style="margin-top:3rem">
+      <div class="card"><span class="card-tag">Setup</span><h3>Regulatory framework loaded automatically</h3><p>Select your state and regulator. Your obligations — state banking law, federal requirements, examination procedures — load in minutes, not months.</p></div>
+      <div class="card"><span class="card-tag">Obligations</span><h3>Obligation → Risk → Control mapping</h3><p>Every regulatory requirement mapped to the risks it creates and the controls designed to address it. Examiners see a coherent compliance story.</p></div>
+      <div class="card"><span class="card-tag">Testing</span><h3>Control design and effectiveness testing</h3><p>Structured testing with RAG scoring, historical trends, and automatic dashboard updates. Know your control environment before your examiner does.</p></div>
+      <div class="card"><span class="card-tag">Findings</span><h3>Examination finding tracking to closure</h3><p>MRAs and MRIAs tracked with owner assignment, target dates, and remediation evidence. Never enter the next examination cycle with open findings.</p></div>
+      <div class="card"><span class="card-tag">Reporting</span><h3>Board reports in one click</h3><p>Professional PDF board reports generated automatically from your live compliance data. No manual assembly, no Sunday afternoon in Excel.</p></div>
+      <div class="card"><span class="card-tag">Examination</span><h3>Examination pack on demand</h3><p>Hand your examiner a complete examination pack on day one — obligations, controls, testing evidence, and findings all in one document.</p></div>
+    </div>
+  </div>
+</div>
+
+<section id="how-it-works">
+  <span class="section-label">How it works</span>
+  <h2>From signup to live in one day</h2>
+  <p class="section-subtitle">No implementation consultants. No six-month project plans. One structured setup and you're operational.</p>
+  <div class="grid-4">
+    <div class="step"><span class="step-num">Step 01</span><h3>Select your profile</h3><p>Tell us your state, charter type, and primary regulator. Your regulatory framework loads automatically.</p></div>
+    <div class="step"><span class="step-num">Step 02</span><h3>Import your registers</h3><p>Upload existing obligations, risks, controls, and policies using our Excel templates. Or start from what we've loaded.</p></div>
+    <div class="step"><span class="step-num">Step 03</span><h3>Run your first tests</h3><p>Work through your control testing schedule. Results update the dashboard in real time.</p></div>
+    <div class="step"><span class="step-num">Step 04</span><h3>Generate your board report</h3><p>One click. Professional PDF. Ready for your next board meeting or examination cycle.</p></div>
+  </div>
+</section>
+
+<div class="full-width" id="pricing">
+  <div class="full-width-inner">
+    <span class="section-label">Pricing</span>
+    <h2>Proportionate to a community bank budget</h2>
+    <p class="section-subtitle">Flat monthly pricing based on asset size. No implementation fees. No per-user charges. No surprises.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <span class="pricing-tier">Starter</span>
+        <h3>Community</h3>
+        <div class="pricing-assets">Under $75M in assets</div>
+        <div class="pricing-price">$299</div>
+        <span class="pricing-period">per month</span>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Full compliance platform</li>
+          <li><span class="check">✓</span> State regulatory framework</li>
+          <li><span class="check">✓</span> Board reports &amp; exam packs</li>
+          <li><span class="check">✓</span> Up to 5 users</li>
+          <li><span class="check">✓</span> Email support</li>
+        </ul>
+        <a href="#get-started" class="btn btn-outline" style="width:100%;justify-content:center">Get Started</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most Common</div>
+        <span class="pricing-tier">Growth</span>
+        <h3>Established</h3>
+        <div class="pricing-assets">$75M – $500M in assets</div>
+        <div class="pricing-price">$599</div>
+        <span class="pricing-period">per month</span>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Everything in Starter</li>
+          <li><span class="check">✓</span> Unlimited users</li>
+          <li><span class="check">✓</span> Vendor risk management</li>
+          <li><span class="check">✓</span> Complaint tracking</li>
+          <li><span class="check">✓</span> Priority support</li>
+        </ul>
+        <a href="#get-started" class="btn btn-primary" style="width:100%;justify-content:center">Get Started</a>
+      </div>
+      <div class="pricing-card">
+        <span class="pricing-tier">Scale</span>
+        <h3>Advanced</h3>
+        <div class="pricing-assets">$500M – $1B in assets</div>
+        <div class="pricing-price">$999</div>
+        <span class="pricing-period">per month</span>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Everything in Growth</li>
+          <li><span class="check">✓</span> Multi-entity support</li>
+          <li><span class="check">✓</span> Custom integrations</li>
+          <li><span class="check">✓</span> Dedicated onboarding</li>
+          <li><span class="check">✓</span> SLA support</li>
+        </ul>
+        <a href="#get-started" class="btn btn-outline" style="width:100%;justify-content:center">Get Started</a>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:2rem;font-size:.88rem;color:var(--muted)">All plans include a 30-day free trial. No credit card required. Cancel any time.</p>
+  </div>
+</div>
+
+<section>
+  <span class="section-label">Who it's for</span>
+  <h2>Built for the people doing the work</h2>
+  <div class="grid-3" style="margin-top:2rem">
+    <div class="card"><h3>Head of Compliance</h3><p>Finally a system that reflects how community bank compliance actually works — not a scaled-down enterprise tool with features you'll never use.</p></div>
+    <div class="card"><h3>Chief Risk Officer</h3><p>Integrated obligation-to-control mapping with live RAG scoring. Your risk posture is always current, not a quarterly snapshot assembled manually.</p></div>
+    <div class="card"><h3>Board &amp; Audit Committee</h3><p>Clear, consistent board reporting. Examination findings tracked to closure. No more surprised faces when examiners arrive.</p></div>
+    <div class="card"><h3>De Novo Banks</h3><p>Build your compliance programme from the ground up with a system designed for your scale — not a startup version of a big bank system.</p></div>
+  </div>
+</section>
+
+<section>
+  <span class="section-label">Philosophy</span>
+  <h2>Built by someone who lived it</h2>
+  <div class="philosophy-block">
+    <p>I built Antifragile GRC because I spent years as a compliance officer watching community banks carry a regulatory burden designed for institutions ten times their size, using tools priced for those same institutions. The market was not going to solve this problem. So I did.</p>
+    <cite>— Patrick Wilson, Founder &amp; Compliance Officer</cite>
+  </div>
+</section>
+
+<div class="full-width" id="get-started">
+  <div class="full-width-inner" style="max-width:700px">
+    <span class="section-label">Get started</span>
+    <h2>Request access</h2>
+    <p class="section-subtitle">Tell us about your bank and we'll be in touch within one business day to set up your account.</p>
+    <div class="signup-section">
+      <div id="form-container">
+        <form id="signup-form" onsubmit="handleSubmit(event)">
+          <div class="form-grid">
+            <div class="form-group full"><label>Organization Name</label><input type="text" name="org_name" placeholder="First Bank of Kansas" required></div>
+            <div class="form-group full"><label>Organization Address</label><input type="text" name="address" placeholder="123 Main Street, Topeka, KS 66601" required></div>
+            <div class="form-group"><label>Primary Regulator</label>
+              <select name="regulator" required>
+                <option value="" disabled selected>Select regulator</option>
+                <option>OCC — Office of the Comptroller of the Currency</option>
+                <option>Federal Reserve — Board of Governors</option>
+                <option>FDIC — Federal Deposit Insurance Corporation</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Approximate Assets</label>
+              <select name="assets" required>
+                <option value="" disabled selected>Select range</option>
+                <option>Under $75 million</option>
+                <option>$75M – $200M</option>
+                <option>$200M – $500M</option>
+                <option>$500M – $1B</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Primary Contact Name</label><input type="text" name="contact_name" placeholder="Jane Smith" required></div>
+            <div class="form-group"><label>Contact Email</label><input type="email" name="contact_email" placeholder="jane@yourbank.com" required></div>
+            <div class="form-group full"><label>Contact Phone</label><input type="tel" name="contact_phone" placeholder="+1 (785) 555-0100" required></div>
+            <div class="form-group full">
+              <label>Additional Users <span class="optional">(optional — can be added after setup)</span></label>
+              <textarea name="additional_users" placeholder="Name, email, role — one per line&#10;e.g. John Doe, john@yourbank.com, Head of Compliance"></textarea>
+            </div>
+            <div class="form-group full">
+              <label>How did you hear about us? <span class="optional">(optional)</span></label>
+              <select name="referral">
+                <option value="" selected>Select an option</option>
+                <option>State Banking Association</option>
+                <option>ICBA</option>
+                <option>Colleague / referral</option>
+                <option>LinkedIn</option>
+                <option>Google search</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary btn-lg">Request Access →</button>
+            <p class="form-note">We'll respond within one business day. Your information is used only to set up your account.</p>
+          </div>
+        </form>
+      </div>
+      <div class="form-success" id="form-success">
+        <div style="font-size:2.5rem;margin-bottom:1rem">✅</div>
+        <h3>Request received</h3>
+        <p>Thank you. We'll be in touch at your contact email within one business day to set up your account.</p>
+        <p style="margin-top:.75rem">Questions? Email <a href="mailto:support@antifragilegrc.com" style="color:var(--blue)">support@antifragilegrc.com</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-banner">
+  <h2>Already have an account?</h2>
+  <p>Log in to your compliance dashboard and pick up where you left off.</p>
+  <a href="https://app.antifragilegrc.com" class="btn btn-primary btn-lg">Log In →</a>
+</div>
+
+<footer>
+  <p>© 2026 Antifragile GRC. Built by compliance officers for compliance officers.<br>
+  <a href="mailto:support@antifragilegrc.com">support@antifragilegrc.com</a> · <a href="https://app.antifragilegrc.com">app.antifragilegrc.com</a></p>
+</footer>
+
+<script>
+async function handleSubmit(e) {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target).entries());
+  const FORMSPREE_ID = 'YOUR_FORM_ID';
+  try {
+    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      document.getElementById('form-container').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    } else { fallbackMailto(data); }
+  } catch { fallbackMailto(data); }
+}
+function fallbackMailto(d) {
+  const s = encodeURIComponent(`Access Request — ${d.org_name}`);
+  const b = encodeURIComponent(`Organization: ${d.org_name}\nAddress: ${d.address}\nRegulator: ${d.regulator}\nAssets: ${d.assets}\nContact: ${d.contact_name}\nEmail: ${d.contact_email}\nPhone: ${d.contact_phone}\nAdditional Users: ${d.additional_users||'None'}\nReferral: ${d.referral||'Not specified'}`);
+  window.location.href = `mailto:support@antifragilegrc.com?subject=${s}&body=${b}`;
+}
+</script>
+</body>
+</html>
